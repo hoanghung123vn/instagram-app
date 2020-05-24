@@ -46,7 +46,7 @@ const stackNavigator = createStackNavigator(
     Main: {
       screen: navigator,
       // Set the title for our app when the tab bar screen is present
-      navigationOptions: { title: 'Instagram Việt Nam 🐷' },
+      navigationOptions: { title: 'Instagram Việt Nam 🤔' },
     },
     // This screen will not have a tab bar
     NewPost: NewPostScreen,

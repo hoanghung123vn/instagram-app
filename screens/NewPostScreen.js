@@ -16,7 +16,7 @@ export default class NewPostScreen extends React.Component {
             const text = navigation.getParam('text');
             const image = navigation.getParam('image');
             if (text && image) {
-              navigation.goBack();
+              navigation.navigate("Feed");
               Fire.shared.post({ text: text.trim(), image });
             } else {
               alert('Need valid description');

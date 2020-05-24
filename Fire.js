@@ -8,17 +8,17 @@ const firebase = require('firebase');
 // Required for side-effects
 require('firebase/firestore');
 
-const collectionName = 'snack-SJucFknGX';
+const collectionName = "instagram-app";
 
 class Fire {
   constructor() {
     firebase.initializeApp({
-      apiKey: 'AIzaSyAQan8_IJ6fY6F8E06FMDKVbWlrdI75mvA',
-      authDomain: 'instahamm-b09ce.firebaseapp.com',
-      databaseURL: 'https://instahamm-b09ce.firebaseio.com',
-      projectId: 'instahamm-b09ce',
-      storageBucket: 'instahamm-b09ce.appspot.com',
-      messagingSenderId: '716190466061',
+      apiKey: "AIzaSyCwSv-ojvAmpwqpH58WHzgilmbMGu7feTw",
+      authDomain: "instagram-firebase01.firebaseapp.com",
+      databaseURL: "https://instagram-firebase01.firebaseio.com",
+      projectId: "instagram-firebase01",
+      storageBucket: "instagram-firebase01.appspot.com",
+      messagingSenderId: "121571270101",
     });
     // Some nonsense...
     firebase.firestore().settings({ timestampsInSnapshots: true });
@@ -40,6 +40,7 @@ class Fire {
       }
 
       const querySnapshot = await ref.get();
+      
       const data = [];
       querySnapshot.forEach(function(doc) {
         if (doc.exists) {
@@ -51,7 +52,7 @@ class Fire {
           const name = user.deviceName;
           const reduced = {
             key: doc.id,
-            name: (name || 'Secret Duck').trim(),
+            name: (name || 'User').trim(),
             ...post,
           };
           data.push(reduced);
