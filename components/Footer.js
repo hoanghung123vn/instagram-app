@@ -14,7 +14,7 @@ export default class Footer extends React.Component {
         onPress={this.onPress}
         style={[styles.touchable, style]}
       >
-        <Text style={styles.text}>Load More...</Text>
+        <Text style={styles.text}>Tải thêm...</Text>
       </TouchableHighlight>
     );
   }

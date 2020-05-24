@@ -1,6 +1,6 @@
 import { Constants } from "expo";
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import getPermission from "../utils/getPermission";
@@ -35,12 +35,16 @@ export default class SelectPhotoScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text onPress={this._selectPhoto} style={styles.text}>
-          Select Photo
-        </Text>
-        <Text onPress={this._takePhoto} style={styles.text}>
-          Take Photo
-        </Text>
+        <TouchableOpacity>
+          <Text onPress={this._selectPhoto} style={styles.text}>
+            Chọn ảnh
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text onPress={this._takePhoto} style={styles.text}>
+            Chụp ảnh
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }

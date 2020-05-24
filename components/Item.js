@@ -26,7 +26,7 @@ export default class Item extends React.Component {
     const aspect = imgW / imgH || 1;
 
     return (
-      <View>
+      <View style={{borderBottomColor: "#c5c5c5", borderBottomWidth: 1}}>
         <Header image={{ uri: image }} name={name} />
         <Image
           resizeMode="contain"
@@ -45,7 +45,6 @@ export default class Item extends React.Component {
 
 const Metadata = ({ name, description }) => (
   <View style={styles.padding}>
-    <IconBar />
     <Text style={styles.text}>{name}</Text>
     <Text style={styles.subtitle}>{description}</Text>
   </View>
@@ -57,7 +56,6 @@ const Header = ({ name, image }) => (
       <Image style={styles.avatar} source={image} />
       <Text style={styles.text}>{name}</Text>
     </View>
-    <Icon name="ios-more" />
   </View>
 );
 
