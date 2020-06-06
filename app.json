@@ -1,12 +1,16 @@
 {
   "expo": {
-    "name": "Instagram clone",
+    "name": "Instagram Việt Nam",
     "description": "Photo Sharing",
     "slug": "instagram",
     "sdkVersion": "35.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "primaryColor": "#cccccc",
     "icon": "./assets/instagram.png",
     "loading": {

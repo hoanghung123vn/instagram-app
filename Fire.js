@@ -91,6 +91,7 @@ class Fire {
         image: remoteUri,
         user: getUserInfo(),
         likedUserIds: [],
+        comments: [],
       });
     } catch ({ message }) {
       alert(message);
@@ -101,6 +102,13 @@ class Fire {
   like = (postId, likedUserIds) => {
     this.collection.doc(postId).update({
       likedUserIds: Array.from(new Set(likedUserIds)),
+    });
+  };
+
+  // Add comment
+  comment = (postId, comments) => {
+    this.collection.doc(postId).update({
+      comments,
     });
   };
 
