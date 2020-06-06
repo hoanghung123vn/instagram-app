@@ -1,12 +1,12 @@
-import uuid from 'uuid';
+import uuid from "uuid";
 
-import getUserInfo from './utils/getUserInfo';
-import shrinkImageAsync from './utils/shrinkImageAsync';
-import uploadPhoto from './utils/uploadPhoto';
+import getUserInfo from "./utils/getUserInfo";
+import shrinkImageAsync from "./utils/shrinkImageAsync";
+import uploadPhoto from "./utils/uploadPhoto";
 
-const firebase = require('firebase');
+const firebase = require("firebase");
 // Required for side-effects
-require('firebase/firestore');
+require("firebase/firestore");
 
 const collectionName = "instagram-app";
 
@@ -24,7 +24,7 @@ class Fire {
     firebase.firestore().settings({ timestampsInSnapshots: true });
 
     // Listen for auth
-    firebase.auth().onAuthStateChanged(async user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) {
         await firebase.auth().signInAnonymously();
       }
@@ -33,16 +33,16 @@ class Fire {
 
   // Download Data
   getPaged = async ({ size, start }) => {
-    let ref = this.collection.orderBy('timestamp', 'desc').limit(size);
+    let ref = this.collection.orderBy("timestamp", "desc").limit(size);
     try {
       if (start) {
         ref = ref.startAfter(start);
       }
 
       const querySnapshot = await ref.get();
-      
+
       const data = [];
-      querySnapshot.forEach(function(doc) {
+      querySnapshot.forEach(function (doc) {
         if (doc.exists) {
           const post = doc.data() || {};
 
@@ -52,7 +52,8 @@ class Fire {
           const name = user.deviceName;
           const reduced = {
             key: doc.id,
-            name: (name || 'User').trim(),
+            id: doc.id,
+            name: (name || "User").trim(),
             ...post,
           };
           data.push(reduced);
@@ -66,20 +67,22 @@ class Fire {
     }
   };
 
-  // Upload Data
-  uploadPhotoAsync = async uri => {
+  // Upload photo
+  uploadPhotoAsync = async (uri) => {
     const path = `${collectionName}/${this.uid}/${uuid.v4()}.jpg`;
     return uploadPhoto(uri, path);
   };
 
+  // Post
   post = async ({ text, image: localUri }) => {
     try {
       const { uri: reducedImage, width, height } = await shrinkImageAsync(
-        localUri,
+        localUri
       );
 
       const remoteUri = await this.uploadPhotoAsync(reducedImage);
-      this.collection.add({
+
+      return await this.collection.add({
         text,
         uid: this.uid,
         timestamp: this.timestamp,
@@ -87,10 +90,18 @@ class Fire {
         imageHeight: height,
         image: remoteUri,
         user: getUserInfo(),
+        likedUserIds: [],
       });
     } catch ({ message }) {
       alert(message);
     }
+  };
+
+  // Update like
+  like = (postId, likedUserIds) => {
+    this.collection.doc(postId).update({
+      likedUserIds: Array.from(new Set(likedUserIds)),
+    });
   };
 
   // Helpers

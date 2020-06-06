@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import getPermission from "../utils/getPermission";
 
 const options = {
-  allowsEditing: true
+  allowsEditing: true,
 };
 
 export default class SelectPhotoScreen extends Component {
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   text: {
     padding: 24,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
